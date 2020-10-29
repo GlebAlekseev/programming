@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\example3_1 int int",
+    "\\example3_1 int int\\exanple3",
+    "\\example3_2 double double",
+    "\\example3_2 double double\\example3_2",
+    "\\example3_3 int double",
+    "\\example3_3 int double\\example3_3",
+    "\\example3_4 double int",
+    "\\example3_4 double int\\example3_4"
+  ],
+  "SelectedNode": "\\example3_1 int int\\exanple3.sln",
+  "PreviewInSolutionExplorer": false
+}

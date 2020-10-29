@@ -1,0 +1,3 @@
+﻿  example2.cpp
+C:\Users\gleb\source\repos\example2\example2\example2.cpp(10,13): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+  example2.vcxproj -> C:\Users\gleb\source\repos\example2\Debug\example2.exe

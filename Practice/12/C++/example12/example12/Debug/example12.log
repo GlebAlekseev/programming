@@ -1,0 +1,3 @@
+﻿  example12.cpp
+C:\Users\gleb\source\repos\example12\example12\example12.cpp(13,23): warning C4018: <=: несоответствие типов со знаком и без знака
+  example12.vcxproj -> C:\Users\gleb\source\repos\example12\Debug\example12.exe
