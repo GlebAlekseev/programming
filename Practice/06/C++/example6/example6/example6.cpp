@@ -54,7 +54,7 @@ int main()
             cout << "x = R";
         }
         else {
-            cout << "Нет корней";// c != 0
+            cout << "Нет корней";
         }
 
     }else if (a != 0 && b == 0 && c == 0) {

@@ -1,0 +1,4 @@
+﻿  example19.cpp
+C:\Users\gleb\Desktop\Programming\Practice\19\C++\example19\example19\example19.cpp(70,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\gleb\Desktop\Programming\Practice\19\C++\example19\example19\example19.cpp(114,21): warning C4018: <: несоответствие типов со знаком и без знака
+  example19.vcxproj -> C:\Users\gleb\Desktop\Programming\Practice\19\C++\example19\Debug\example19.exe

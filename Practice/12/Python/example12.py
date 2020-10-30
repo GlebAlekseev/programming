@@ -1,10 +1,16 @@
-n = int(input())
-if n >= 0:
+
+stop = 1
+while stop == 1:
+	stop = 0
+	n = int(input())
 	resultat = 1
 	i = 2
 	while i <= n:
 		resultat = resultat * i
 		i +=1
-	print(resultat)
-else:
-	print("n не соответствует условию")
+
+	if resultat >= 1 and resultat <= 10**9:
+		print(resultat)
+	else:
+		print("Факториал не входит в диапазон")
+		stop = 1

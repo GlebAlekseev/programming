@@ -1,0 +1,3 @@
+﻿  example15.cpp
+C:\Users\gleb\Desktop\Programming\Practice\15\C++\example15\example15\example15.cpp(9,24): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  example15.vcxproj -> C:\Users\gleb\Desktop\Programming\Practice\15\C++\example15\x64\Debug\example15.exe

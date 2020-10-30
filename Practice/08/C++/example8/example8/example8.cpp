@@ -4,30 +4,41 @@ using namespace std;
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
-    double x,y,result;
+    int stop = 1;
+    double x, y, result;
     char op;
-    cin >> x >> op >> y;
-    if (op == '+') {
-        result = x + y;
-        cout << result;
-    }
-    else if (op == '-') {
-        result = x - y;
-        cout << result;
-    }
-    else if (op == '*') {
-        result = x * y;
-        cout << result;
-    }
-    else if (op == '/') {
-        result = x / y;
-        cout << result;
-    }
-    else {
-        cout << "В неверном формате введены данные.";
-    }
+    setlocale(LC_ALL, "Russian");
+
+    for (;stop == 1;) {
+        stop = 0;
+
+        cin >> x >> op >> y;
+        if (op == '+') {
+            result = x + y;
+            cout << result;
+        }
+        else if (op == '-') {
+            result = x - y;
+            cout << result;
+        }
+        else if (op == '*') {
+            result = x * y;
+            cout << result;
+        }
+        else if (op == '/') {
+            if (y == 0) {
+                cout << "Знаменатель не может быть равен 0" << endl;
+                stop = 1;
+            }
+            else {
+                result = x / y;
+                cout << result;
+            }
+            }
+        else {
+            cout << "В неверном формате введены данные." << endl;
+        }
 
 
-
+    }
 }

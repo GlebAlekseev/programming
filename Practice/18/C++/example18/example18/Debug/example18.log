@@ -1,0 +1,4 @@
+﻿  example18.cpp
+C:\Users\gleb\Desktop\Programming\Practice\18\C++\example18\example18\example18.cpp(27,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\gleb\Desktop\Programming\Practice\18\C++\example18\example18\example18.cpp(31,25): warning C4390: ";": обнаружен пустой контролируемый оператор; это правильно?
+  example18.vcxproj -> C:\Users\gleb\Desktop\Programming\Practice\18\C++\example18\Debug\example18.exe

@@ -1,0 +1,3 @@
+﻿  example20.cpp
+C:\Users\gleb\Desktop\Programming\Practice\20\C++\example20\example20\example20.cpp(46,12): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+  example20.vcxproj -> C:\Users\gleb\Desktop\Programming\Practice\20\C++\example20\Debug\example20.exe
