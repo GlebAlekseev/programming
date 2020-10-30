@@ -1,10 +1,9 @@
 moneys = int(input())
 dif = int(input())
 
-
 ydel = []
 describe = []
-
+TempUp = []
 i = 0
 while i < dif:
     describe.append(input())
@@ -14,9 +13,10 @@ while i < dif:
 
 i = 0
 while i < dif:
-    ydel[i] = describe[i][2]/describe[i][1]
-    TempUp[i] = describe[i][2]/describe[i][1]
-    i +=1
+	TempYdel = int(describe[i][2])/int(intdescribe[i][1])
+	ydel[i] = str(TempYdel)
+	TempUp[i] = describe[i][2]/describe[i][1]
+	i +=1
 
 
 

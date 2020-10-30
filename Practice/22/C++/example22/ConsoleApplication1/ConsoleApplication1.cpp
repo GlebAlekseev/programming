@@ -93,7 +93,7 @@ int main()
 
 	int x, y;
 	cin >> x >> y;
-
+z
 	if (x < 27 && y < 25) {
 		if (maze[y][x] != '#') {
 			maze[y][x] = '#';
