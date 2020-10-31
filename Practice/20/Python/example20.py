@@ -4,20 +4,26 @@ dif = int(input())
 ydel = []
 describe = []
 TempUp = []
+Name = []
+Price = []
+Va = []
+SumV = 0
+
+
 i = 0
 while i < dif:
     describe.append(input())
     describe[i] = describe[i].split()
-
+    Name.append(describe[i][0])
+    Price.append(int(describe[i][1]))
+    Va.append(int(describe[i][2]))
     i +=1
-
 i = 0
 while i < dif:
-	TempYdel = int(describe[i][2])/int(intdescribe[i][1])
-	ydel[i] = str(TempYdel)
-	TempUp[i] = describe[i][2]/describe[i][1]
+	TempYdel = Price[i]/Va[i]
+	ydel.append(TempYdel)
+	TempUp.append(TempYdel)
 	i +=1
-
 
 
 TempUp = TempUp.sort()
@@ -28,70 +34,33 @@ SumV = 0
 
 i = 0
 while i < dif:
-    j = 0
-    while j < dif:
-        if TempUp[i] == ydel[j]:
-            if SumMoney/describe[j][2] >= 1:
-                if SumMoney - describe[j][2] * int(moneys/describe[j][2]) < TempM:
-                    
-                    TempM = SumMoney - describe[j][2] * int(moneys/describe[j][2])
-                    TempJ = j
-
-                if j == dif - 1:
-                    print(describe[TempJ][0], end = " ")
-                    print(int(moneys/describe[TempJ][2]), end = " ")
-                    SumV = SumV + describe[TempJ][1] * int(moneys/describe[TempJ][2])
-                    SumMoney = SumMoney - describe[TempJ][2] *int(moneys/describe[TempJ][2])
-        if i == dif - 1 and j == dif - 1 and SumV != 0:
-            print(Sumv)
-            print(SumMoney)
-
-        j += 1
+	j = 0
+	while j < dif:
 
 
-        for l in dif:
-            if describe[l][2] < dTemp:
-                dTemp = describe[l][2]
-        if moneys - dTemp < 0:
-            print(-1)
+		if ydel[i] == ydel[j]:
+			if SumMoney/Price[i] >= 1:
+				if SumMoney - Price[i] * int(moneys/Price[i]) < TempM:
+					TempM = SumMoney - Price[i] * int(moneys/Price[i])
+					TempJ = j
 
+				if j == dif - 1:
+					print(Name[TempJ], end = " ")
+					print(int(moneys/Price[TempJ]))
+					SumV = SumV + int(Va[TempJ]) * int(moneys/Price[TempJ])
+					SumMoney = SumMoney - int(Price[TempJ]) *int(moneys/Price[TempJ])
 
+		if i == dif - 1 and j == dif - 1 and SumV != 0:
 
-    i += 1
+			print(SumV)
+			print(SumMoney)
 
-#     for (int i = 0; i < dif; i++) {
-#         for (int j = 0; j < dif; j++) {
-
-#             if (TempUP[i] == ydelF[j]) {
-
-#                 if (SumMoney / Price[j] >= 1) {
-#                     if (SumMoney - Price[j] * int(moneys / Price[j]) < TempM) {
-
-#                         TempM = SumMoney - Price[j] * int(moneys / Price[j]);
-#                         Tempj = j;
-#                     }
-
-#                     if (j == dif - 1) {
-
-#                         cout << Name[Tempj];
-#                         cout << " " << int(moneys / Price[Tempj]) << endl;
-#                         SumV = SumV + V[Tempj] * int(moneys / Price[Tempj]);
-#                         SumMoney = SumMoney - Price[Tempj] * int(moneys / Price[Tempj]);
-#                     }
-#                 }
-#             }
-
-#             if (i == dif - 1 && j == dif - 1 && SumV != 0) {
-
-#                 cout << SumV << endl;
-#                 cout << SumMoney << endl;
-#             }
-#         }
-#     }
-#     //
-#     for (int i = 0; i < dif; i++) {
-#         if (Price[i] < dTemp) { dTemp = Price[i]; }
-#     }
-#     if (moneys - dTemp < 0) {
-#         cout << "-1";
-#     }
+		l = 0
+		while l < dif:
+			if Price[l] < dTemp:
+				dTemp = Price[l]
+			l +=1
+		j += 1
+	i +=1
+if moneys - dTemp < 0:
+	print(-1)
