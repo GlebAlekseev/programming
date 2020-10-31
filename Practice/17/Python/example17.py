@@ -1,203 +1,88 @@
-
 numerics = []
+numerics.append(37)
 i = 0
+tempN = 0
+sk = 1
+Numbers = [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36 ]
+Lastlist = []
 while 1>0:
-    num = int(input())
-    if num >= -36 and num <=36:
-        if num >= 0:
-            numerics.append(num)
-            h = 0
-            numerics.sort()
-            tmp = 0
-            for h in range(i):
-                if numerics.count(numerics[h]) >= tmp:
-                    tmp = numerics.count(numerics[h])
-
-            j = 0
-            while j < i+1:
-                if tmp == numerics.count(numerics[j]):
-                    # print(numerics[j], end = " ")
-                    
-
-                j +=1
-
-
-
-
-            if i == 0:
-                print(numerics[0], end = " ")
-
-            print()
-        else:
-            break
-    else:       
-        print("Число не входит в диапазон от -36 до 36.")
-    i +=1
-
-
-
-
-#                 for (int d = 0; d <= i; d++) {
-#                     k = -1;
-#                     for (int j = 0; j <= i; j++) {
-#                         if (pArray[d] == pArray[j]) {
-#                             k = k + 1;
-#                         }
-#                         if (k >= z) {
-#                             z = k;
-#                         }
-
-#                     }
-#                 }
-
-
-
-
-
-
-#                 for (int d = 0; d < i + 1; d++) {
-#                     if (pArray[d] == pArray[d + 1]) {
-#                         sk = sk + 1;
-#                     }
-#                     else { sk = 1; }
-
-#                     if (sk == z + 1) {
-#                         cout << pArray[d] << " ";
-
-#                     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# int main() {
-#     int num, k, z = 0, sk = 1, arg = 0;
-#     int* pArray = new int[0];
-#     string Lastlist;
-#     setlocale(LC_ALL, "Russian");
-#     for (int i = 0; i > -1; i++) {
-#         cin >> num;
-
-#         if (num >= -36 && num <= 36) {
-#             if (num >= 0) {
-
-
-#                 int cf = 0;
-
-#                 for (int h = 0; h < i; h++) {
-#                     for (int f = h + 1; f < i + 1; f++) {
-#                         if (pArray[f] < pArray[h])
-#                         {
-#                             int tmp = pArray[f];
-#                             pArray[f] = pArray[h];
-#                             pArray[h] = tmp;
-#                         }
-#                     }
-#                 }
-
-
-#                 for (int d = 0; d <= i; d++) {
-#                     k = -1;
-#                     for (int j = 0; j <= i; j++) {
-#                         if (pArray[d] == pArray[j]) {
-#                             k = k + 1;
-#                         }
-#                         if (k >= z) {
-#                             z = k;
-#                         }
-
-#                     }
-#                 }
-
-
-
-
-
-
-#                 for (int d = 0; d < i + 1; d++) {
-#                     if (pArray[d] == pArray[d + 1]) {
-#                         sk = sk + 1;
-#                     }
-#                     else { sk = 1; }
-
-#                     if (sk == z + 1) {
-#                         cout << pArray[d] << " ";
-
-#                     }
-#                 }
-#                 //
-#                 cout << "\n";
-#                 Lastlist.push_back(num);
-#                 if (i >= 12) {
-#                     reverse(begin(Lastlist), end(Lastlist));
-
-#                     //
-#                     Lastlist.pop_back();
-#                     reverse(begin(Lastlist), end(Lastlist));
-#                 }
-
-
-
-#                 string Numbers = { 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37 };
-
-#                 //
-
-#                 for (int u = 0; u < Numbers.length(); u++) {
-#                     int what = 0;
-
-
-#                     if (i >= 12) {
-#                         for (int a = 0; a < 12; a++) {
-#                             if (Numbers[u] == Lastlist[a]) { what = 1; }
-#                         }
-#                     }
-#                     else {
-#                         for (int a = 0; a < Lastlist.length(); a++) {
-#                             if (Numbers[u] == Lastlist[a]) { what = 1; }
-#                         }
-#                     }
-                    
-#                     if (what == 1) { continue; }
-#                     cout << int(Numbers[u]);
-#                 }
-
-#                 cout << "\n";
-                
-#                 int red = 0;
-#                 int black = 0;
-
-#                     for (int dg = 0; dg < Lastlist.length(); dg++) {
-#                         if (Lastlist[dg] == 0) {}
-#                         else if (Lastlist[dg] % 2 == 0) { red = red + 1; }
-
-#                         else { black = black + 1; }
-#                     }
-#                 cout << black << " " << red;
-#                 cout << "\n";
-#                 cout << "\n";
-#             }
-#             else {
-#                 break;
-#             }
-#         }
-#         else {
-#             cout << "Число не входит в диапазон от -36 до 36.";
-#             break;
-#         }
-
-
-#     }
-# }
+	num = int(input())
+	if num >= -36 and num <=36:
+		if num >= 0:
+			numerics.append(num)
+			numerics.sort()
+
+			j = 0
+			while j <= i:
+
+				if numerics.count(numerics[j]) >= tempN:
+					tempN = numerics.count(numerics[j])
+				j +=1
+			v = 0
+
+			while v < i+1:
+				# 1 37
+				# 1 2 37
+				# 1 2 3 37
+				# 1 2 3 3 37
+				# 1 2 3 3 4 37
+				# 1 2 3 3 4 5 37
+				# 2
+				if numerics[v] == numerics[v+1]:
+					sk = sk +1
+				else:
+					sk = 1
+				if sk == tempN:
+					print(numerics[v], end = " ")
+				v +=1
+
+			# 
+			Lastlist.append(num)
+			if i >= 12:
+				Lastlist.reverse()
+				Lastlist.pop()
+				Lastlist.reverse()
+			print()
+			u = 0
+			while u < len(Numbers):
+				what = 0
+				if i>= 12:
+					r = 0
+					while r< 12:
+						if Numbers[u] == Lastlist[r]:
+							what = 1
+						r +=1
+				else:
+					r = 0
+					while r< len(Lastlist):
+						if Numbers[u] == Lastlist[r]:
+							what = 1
+						r+=1
+				if what == 1:
+					u +=1
+					continue
+				print(Numbers[u], end = " ")
+				u +=1
+			print()
+# 		
+
+			red = 0
+			black = 0
+			dg = 0
+			while dg < len(Lastlist):
+				if Lastlist[dg] == 0:
+					s = 0
+				elif Lastlist[dg] % 2 == 0:
+					black = black + 1
+				else: 
+					red = red + 1
+
+				dg +=1
+			print(red,black)
+
+		else:
+			break
+		print()
+	else:
+		print("Число не входит в диапазон от -36 до 36.")
+	i +=1

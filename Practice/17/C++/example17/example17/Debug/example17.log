@@ -1,5 +1,5 @@
 ﻿  example17.cpp
 C:\Users\gleb\Desktop\Programming\Practice\17\C++\example17\example17\example17.cpp(82,23): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\gleb\Desktop\Programming\Practice\17\C++\example17\example17\example17.cpp(92,25): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\gleb\Desktop\Programming\Practice\17\C++\example17\example17\example17.cpp(113,26): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\gleb\Desktop\Programming\Practice\17\C++\example17\example17\example17.cpp(106,26): warning C4018: <: несоответствие типов со знаком и без знака
   example17.vcxproj -> C:\Users\gleb\Desktop\Programming\Practice\17\C++\example17\Debug\example17.exe
