@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <cmath>
+#include <iomanip>
 using namespace std;
 #include "factorial.h"
 #include "sinteil.h"
@@ -28,7 +29,7 @@ int main()
 	cout << "x" << '\t' << "sin(x)" << endl;
 	for (double i = 0; i < PI / 4; i = i + PI / 180)
 	{
-		cout << round(i * 10000) / 10000 << '\t' << round(teilor(i, 5) * 10000) / 10000 << endl;
+		cout << setprecision(4) << i << '\t' << setprecision(4) << teilor(i, 5) << endl;
 
 	}
 
