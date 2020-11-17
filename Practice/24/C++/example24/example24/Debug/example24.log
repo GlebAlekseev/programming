@@ -1,2 +1,5 @@
 ﻿  example24.cpp
+C:\Users\gleb\Desktop\Programming\Practice\24\C++\example24\example24\example24.cpp(23,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\gleb\Desktop\Programming\Practice\24\C++\example24\example24\example24.cpp(27,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\gleb\Desktop\Programming\Practice\24\C++\example24\example24\example24.cpp(45,20): warning C4018: <: несоответствие типов со знаком и без знака
   example24.vcxproj -> C:\Users\gleb\Desktop\Programming\Practice\24\C++\example24\Debug\example24.exe
