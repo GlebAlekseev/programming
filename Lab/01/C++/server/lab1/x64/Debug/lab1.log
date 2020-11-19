@@ -1,0 +1,5 @@
+﻿  lab1.cpp
+C:\Users\gleb\Desktop\Programming\Lab\01\C++\server\lab1\lab1.cpp(61,26): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\gleb\Desktop\Programming\Lab\01\C++\server\lab1\lab1.cpp(62,26): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\gleb\Desktop\Programming\Lab\01\C++\server\lab1\lab1.cpp(63,26): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  lab1.vcxproj -> C:\Users\gleb\Desktop\Programming\Lab\01\C++\server\x64\Debug\lab1.exe
