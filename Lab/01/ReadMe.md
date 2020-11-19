@@ -236,13 +236,14 @@ label3.pack(fill=X)
 frame1.pack(fill=X)
 root.bind("<Button-1>",left_click)
 root.mainloop()
-```<br>
+```
+<br>
 
 Скриншот графического интерфейса клиентского приложения.<br>
-<p align="center"> ![](./image/pic1.jpg)<br>
-Рис.1 Графический интерфейс на Tkinter.<br><br>
+![](./image/pic1.png)<br>
+Рис.1 Графический интерфейс на Tkinter<br><br>
 Скриншот браузера с загруженными виджетом.<br>
-<p align="center"> ![](./image/pic2.png)<br>
+![](./image/pic2.png)<br>
 Рис.2 Виджет.<br>
 ## Вывод: 
 
