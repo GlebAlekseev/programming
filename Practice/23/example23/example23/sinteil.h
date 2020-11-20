@@ -1,3 +1,6 @@
+#ifndef STP
+#define STP
+#endif
 double teilor(double x, int k) {
 	double sinx = x;
 	double temp = x;
