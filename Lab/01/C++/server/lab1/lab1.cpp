@@ -26,10 +26,17 @@ void gen_response(const Request& req, Response& res) {
 			// если максимальный юникс прогноза + 1 час >= нынешнего проверка по кешу иначе создание кеша + новый прогноз
 			//достать кеш
 			ifstream src("cache.json");
-			src >> cache;
+			if (src)
+			{
+				src >> cache;
+			}
+			
 				double tempNOW;
 				string descriptionNOW;
 				string iconNOW;
+				if (empty(cache)) {
+					cache["hourly"][47]["dt"] = 0;
+				}
 			if (int(cache["hourly"][47]["dt"]) + 3600 >= unixtimenow) {
 				for (int i = 0; i < 48; i++)
 				{
@@ -47,7 +54,7 @@ void gen_response(const Request& req, Response& res) {
 				tempNOW = h["hourly"][0]["temp"];
 				descriptionNOW = h["hourly"][0]["weather"][0]["description"];
 				iconNOW = h["hourly"][0]["weather"][0]["icon"];
-				ofstream srco("cache/cache.json");
+				ofstream srco("cache.json");
 				srco << h;
 			}
 			////к этому моменту в любом исходе необходимы данные иконки описания и температуры  tempNOW descriptionNOW iconNOW
@@ -66,7 +73,7 @@ void gen_response(const Request& req, Response& res) {
 			str.replace(str.find(word3), num3, to_string(int(round(tempNOW))));
 			str.replace(str.find(word2), num2, iconNOW);
 			//// fin html
-			cout << str;// console check info
+		/*	cout << str;*/// console check info
 			res.set_content(str, "text/html");// Вывод
 		}
 		else {
@@ -98,7 +105,12 @@ void gen_responseraw(const Request& req, Response& res) {
 			//достать кеш
 			//Получение кеша
 			ifstream src("cache.json");
-			src >> cache;
+			
+			if (src)
+			{
+				src >> cache;
+			}
+
 			double tempNOW = 0;
 			string descriptionNOW;
 			string iconNOW;
@@ -124,13 +136,13 @@ void gen_responseraw(const Request& req, Response& res) {
 				descriptionNOW = h["hourly"][0]["weather"][0]["description"];
 				iconNOW = h["hourly"][0]["weather"][0]["icon"];
 				// ..Новый кеш
-				ofstream srco("cache/cache.json");
+				ofstream srco("cache.json");
 				srco << h;
 			}
 			json str;
 			str["temp"] = to_string(int(round(tempNOW)));
 			str["description"] = descriptionNOW;
-			cout << str;
+			/*cout << str;*/
 			res.set_content(str.dump(), "text/json");
 		}
 		else {

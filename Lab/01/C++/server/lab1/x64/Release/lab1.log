@@ -1,0 +1,10 @@
+﻿  lab1.cpp
+C:\Users\gleb\Desktop\Programming\Lab\01\C++\server\lab1\lab1.cpp(68,26): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\gleb\Desktop\Programming\Lab\01\C++\server\lab1\lab1.cpp(69,26): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\gleb\Desktop\Programming\Lab\01\C++\server\lab1\lab1.cpp(70,26): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  Создание кода
+  0 of 4323 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  lab1.vcxproj -> C:\Users\gleb\Desktop\Programming\Lab\01\C++\server\x64\Release\lab1.exe
