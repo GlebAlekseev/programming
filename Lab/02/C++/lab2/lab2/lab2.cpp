@@ -530,18 +530,26 @@ void gen_response(const Request& req, Response& res) {
                                if (statuswhat)
                                {
 
-                                   if (url.find("https://"))
-                                   {
+    /*                               if (url.find("https://"))
+                                   {*/
                                        string header = url.substr(0, url.find("/", 9));
                                        string footer = url.substr(url.find("/", 9));
-                                       Client cli(header.c_str());
-                                       auto res = cli.Post(footer.c_str(), temp.dump(), "text/json");
-                                   }
+                                        cout << header.c_str() << " " << footer.c_str() << endl;
+                                       Client cliws("http://127.0.0.1:5000");
+                                       cout << header.c_str() << " % " << footer.c_str() << endl;
+                                       auto res = cliws.Post("/", temp.dump(), "application/json");
+ /*                                      cout << res->body;*/
+                                       //Client cli(header.c_str());
+                                       //auto res = cli.Post(footer.c_str(), temp.dump(), "text/json");
+                                   /*}*/
 
                                    //if (url.find("http://"))
                                    //{
+                                   //    cout << "localhost5000";
                                    //    string header = url.substr(0, url.find("/", 9));
+                                   //    cout << header;
                                    //    string footer = url.substr(url.find("/", 9));
+                                   //    cout << footer;
                                    //    Client cli(header.c_str());
                                    //    auto res = cli.Post(footer.c_str(), temp.dump(), "text/json");
                                    //}
@@ -554,7 +562,7 @@ void gen_response(const Request& req, Response& res) {
 
                            }
 
-                           j["response"]["end_session"] = true;
+                          /* j["response"]["end_session"] = true;*/
                            j["response"]["text"] = u8R"(заходите еще)";
 
 
