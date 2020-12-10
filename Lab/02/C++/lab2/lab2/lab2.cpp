@@ -529,19 +529,34 @@ void gen_response(const Request& req, Response& res) {
                                }
                                if (statuswhat)
                                {
-
-    /*                               if (url.find("https://"))
-                                   {*/
+                                   //cout << url.find("ttp") << " " << url << endl;
+                                   if (url.find("ttp"))
+                                   {/*url.substr(0, url.find("/", 9))*/
+                                       /*url.substr(url.find("/", 9))*/
                                        string header = url.substr(0, url.find("/", 9));
                                        string footer = url.substr(url.find("/", 9));
-                                        cout << header.c_str() << " " << footer.c_str() << endl;
-                                       Client cliws("http://127.0.0.1:5000");
-                                       cout << header.c_str() << " % " << footer.c_str() << endl;
-                                       auto res = cliws.Post("/", temp.dump(), "application/json");
- /*                                      cout << res->body;*/
-                                       //Client cli(header.c_str());
-                                       //auto res = cli.Post(footer.c_str(), temp.dump(), "text/json");
-                                   /*}*/
+                                       Client cli(header.c_str());
+                                       auto resd = cli.Post(footer.c_str(), temp.dump(), "application/json");
+
+                                       if (resd) {
+                                           // Проверяем статус ответа, т.к. может быть 404 и другие
+                                           if (resd->status == 200) {
+                                               // В res->body лежит string с ответом сервера
+                                               std::cout << resd->body << std::endl;
+                                           }
+                                           else {
+                                               std::cout << "Status code: " << resd->status << std::endl;
+                                           }
+                                       }
+                                       else {
+                                           auto err = resd.error();
+                                           std::cout << "Error code: " << err << std::endl;
+                                       }
+
+
+
+
+                                   }
 
                                    //if (url.find("http://"))
                                    //{
