@@ -1,51 +1,47 @@
 from openpyxl import Workbook
+from openpyxl import load_workbook
 from flask import Flask, request
 import json
+import datetime
+import time
 
 
 app = Flask(__name__)
- 
+jbuffer = []
 @app.route('/', methods=['POST'])
 def index():
-	value = request.json
-	print(value)
-	# wb = Workbook() # создаю блокнотную область
-	# ws = wb.active # позиционируюсь на активной странице, первой по умолчанию в WS координаты ячеек 
-	# ws['A1'] =  value
-	# print('val')
-	# wb.save("sampl.xlsx") # сохранение файла есть аналог точечного вноса .cell(row= column=).value =
+	rows = request.json
+	for row in rows['check']: # получение новых данных
+		dicti = {"user_id":rows['user_id'],"datetime":"Время и дата","item":row['item'],"price":row['price']}
+		jbuffer.append(dicti)
+		if len(jbuffer) == 10:
+			try: # проверка на наличие файла
+				book = load_workbook("data.xlsx")
+			except FileNotFoundError:
+				#Если файла нет
+				wb = Workbook()
+				ws = wb.active
+				ws['A1'] = 'N';
+				ws['B1'] = 'User ID';
+				ws['C1'] = 'Datetime';
+				ws['D1'] = 'Item';
+				ws['E1'] = 'Prise';
+				wb.save("data.xlsx")
+			else:
+				book.close()
+			book = load_workbook("data.xlsx")
+			sheet = book.active#достаем данные
+			ink = sheet.max_row
+			for row in jbuffer:
+				sheet[1+ink][0].value = ink;
+				sheet[1+ink][1].value = row['user_id'];
+				sheet[1+ink][2].value = row['datetime']
+				sheet[1+ink][3].value = row['item'];
+				sheet[1+ink][4].value = row['price'];
+				ink +=1
+			book.save("data.xlsx")
+			jbuffer.clear()
 	return "Ok"
-# print("hello")
-# print("Value = ",value)
+
 if __name__ == "__main__":
     app.run()
-# with open('hello.json') as file:
-# 	data = json.load(file)
-# print(data)
-# wb = Workbook() # создаю блокнотную область
-# ws = wb.active # позиционируюсь на активной странице, первой по умолчанию в WS координаты ячеек 
-# ws['A1'] =  value
-
-# # grab the active worksheet
-# wb.save("sample.xlsx") # сохранение файла есть аналог точечного вноса .cell(row= column=).value =
-
-# # Data can be assigned directly to cells
-
-# ws[1][0].value = 12 # ws[1][0].value - валуе для того чтобы достать значение из ячейки ряд колонка = 'A1'
-
-# # Rows can also be appended
-# ws.append([1, 2, 3])
-
-# # Python types will automatically be converted
-# import datetime
-# ws['A2'] = datetime.datetime.now()
-
-# # Save the file
-# wb.save("sample.xlsx") # сохранение файла есть аналог точечного вноса .cell(row= column=).value =
-
-
-# wb = Workbook() # создаю блокнотную область
-
-# book = wb.open("sample.xlsx",read_only=True )
-# ws = book.active # позиционируюсь на активной странице, первой по умолчанию в WS координаты ячеек 
-# print(ws["B2"].value) in range (? max_row+1)
