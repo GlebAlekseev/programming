@@ -5,18 +5,18 @@
 #include <time.h>
 using namespace std;
 vector<int> last_arr;
-void change(int a1, int a2) {
+void change(int a1, int a2) { // меняем элементы местами
 	int temp = last_arr[a1];
 	last_arr[a1] = last_arr[a2];
 	last_arr[a2] = temp;
 }
-void print(vector<int>arr) {
+void print(vector<int>arr) {// выводим конечный массив
 	for (int i = 0; i < arr.size(); i++)
 	{
 		cout << arr[i] << " ";
 	}
 }
-vector<int> BozoSort(vector<int> arr, bool SortInfo = 1) {
+vector<int> BozoSort(vector<int> arr, bool SortInfo = 1) { // для вектора
 	last_arr = arr;
 	bool go = true;
 	srand(time(NULL));
@@ -46,7 +46,7 @@ vector<int> BozoSort(vector<int> arr, bool SortInfo = 1) {
 	}
 	return last_arr;
 }
-vector<int> BozoSort(vector<vector <int>> arr, int n, bool SortInfo = 1) {
+vector<int> BozoSort(vector<vector <int>> arr, int n, bool SortInfo = 1) { // для двумерного вектора
 	//заполняем одномерный массив
 	int p = sqrt(n);
 	int k = 0;
@@ -86,7 +86,7 @@ vector<int> BozoSort(vector<vector <int>> arr, int n, bool SortInfo = 1) {
 	}
 	return last_arr;
 }
-vector<int> BozoSort(int ar0, int ar1, int ar2, bool SortInfo = 1) {
+vector<int> BozoSort(int ar0, int ar1, int ar2, bool SortInfo = 1) { // для трех чисел
 	last_arr.clear();
 	last_arr.push_back(ar0);
 	last_arr.push_back(ar1);
@@ -124,18 +124,18 @@ int main()
 	setlocale(LC_ALL, "Russian");
 	int n;
 	vector<int> arr;
-	cin >> n;
-	if (sqrt(n) - (int)sqrt(n) == 0 && n >= 4 && n <= 100)
+	cin >> n; // вводим колво элементов
+	if (sqrt(n) - (int)sqrt(n) == 0 && n >= 4 && n <= 100) // соответсиве условию n
 	{
-		vector<vector <int>> arr2(sqrt(n), vector <int>(sqrt(n)));
-		for (int i = 0; i < n; i++)
+		vector<vector <int>> arr2(sqrt(n), vector <int>(sqrt(n))); // создание двумерного массива
+		for (int i = 0; i < n; i++) // заполнение одномерного вектора
 		{
 			int temp;
 			cin >> temp;
 			arr.push_back(temp);
 		}
 		int l = 0;
-		for (int i = 0; i < sqrt(n); i++)
+		for (int i = 0; i < sqrt(n); i++) // формирование двумерного вектора из одномерного
 		{
 			for (int j = 0; j < sqrt(n); j++)
 			{
@@ -143,21 +143,22 @@ int main()
 				l++;
 			}
 		}
-		int ar0 = arr[0];
-		int ar1 = arr[1];
-		int ar2 = arr[2];
-		print(BozoSort(arr));
+		int ar0 = arr[0]; // получение первых трех чисел
+		int ar1 = arr[1]; //
+		int ar2 = arr[2];//
+
+		//вывод
+		print(BozoSort(arr)); //1
 		cout << endl;
-		print(BozoSort(arr, 0));
+		print(BozoSort(arr, 0));//1
 		cout << endl;
-		print(BozoSort(arr2, n));
+		print(BozoSort(arr2, n));//2
 		cout << endl;
-		print(BozoSort(arr2, n, 0));
+		print(BozoSort(arr2, n, 0));//2
 		cout << endl;
-		//// 3 случай
-		print(BozoSort(ar0, ar1, ar2));
+		print(BozoSort(ar0, ar1, ar2));//3
 		cout << endl;
-		print(BozoSort(ar0, ar1, ar2, 0));
+		print(BozoSort(ar0, ar1, ar2, 0));//3
 		cout << endl;
 	}
 	else {
