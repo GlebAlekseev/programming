@@ -48,7 +48,7 @@ void print_factorization(unsigned int n) {
             }
             count++;
         }
-        if (count != 1 && nums[i] != nums[i + 1])
+        if (count != 1 && nums[i] != nums[i + 1] || i == nums.size() - 2 && nums[i] == nums[i + 1])
         {
             if (zvezd) {
 
