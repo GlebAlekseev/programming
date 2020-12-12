@@ -54,11 +54,13 @@ int main()
 
 			for (int i = 0; i < n; i++)// повторит столько сколько сигналов
 			{	
+				int start = 1;
 				if (last_nums.size() < 5)//До 5 элементов наполнение
 				{
 					last_nums.push_back(nums[i]);
+					start = 0;
 				}
-				if (last_nums.size() == 5)
+				if (last_nums.size() == 5 and start == 1)
 				{
 					for (size_t k = 0; k < 5; k++)
 					{
