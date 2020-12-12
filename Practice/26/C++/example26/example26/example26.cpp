@@ -9,7 +9,6 @@ void print(vector<T>arr) {// выводим конечный массив
 	for (int i = 0; i < arr.size(); i++)
 	{
 			cout << arr[i] << " ";
-
 	}
 }
 template <typename T>
@@ -131,18 +130,16 @@ int main()
 	setlocale(LC_ALL, "Russian");
 	int n;
 	vector<double> arr;
-	vector<string> arr1;
+
 	cin >> n; // вводим колво элементов
 	if (sqrt(n) - (int)sqrt(n) == 0 && n >= 4 && n <= 100) // соответсиве условию n
 	{
 		vector<vector <double>> arr2(sqrt(n), vector <double>(sqrt(n))); // создание двумерного массива
-		vector<vector <string>> arr3(sqrt(n), vector <string>(sqrt(n))); // создание двумерного массива
 		for (int i = 0; i < n; i++) // заполнение одномерного вектора
 		{
 			int temp;
 			cin >> temp;
 			arr.push_back((double)temp);
-			arr1.push_back(to_string(temp));
 		}
 		int l = 0;
 		for (int i = 0; i < sqrt(n); i++) // формирование двумерного вектора из одномерного
@@ -150,16 +147,13 @@ int main()
 			for (int j = 0; j < sqrt(n); j++)
 			{
 				arr2[i][j] = arr[l];
-				arr3[i][j] = arr1[l];
 				l++;
 			}
 		}
 		double ar0 = arr[0]; // получение первых трех чисел
 		double ar1 = arr[1]; //
 		double ar2 = arr[2];//
-		string ar0s = arr1[0]; // получение первых трех чисел
-		string ar1s = arr1[1]; //
-		string ar2s = arr1[2];//
+
 
 		//вывод double
 		print(BozoSort(arr)); //1
@@ -174,6 +168,37 @@ int main()
 		cout << endl;
 		print(BozoSort(ar0, ar1, ar2, 0));//3
 		cout << endl;
+	}
+	else {
+		cout << "n не подходит по условию";
+	}
+	//////////////////////////////////////////////////////
+	vector<string> arr1;
+	cin >> n; // вводим колво элементов
+	if (sqrt(n) - (int)sqrt(n) == 0 && n >= 4 && n <= 100) // соответсиве условию n
+	{
+		vector<vector <string>> arr3(sqrt(n), vector <string>(sqrt(n))); // создание двумерного массива
+		for (int i = 0; i < n; i++) // заполнение одномерного вектора
+		{
+			int temp;
+			cin >> temp;
+			arr1.push_back(to_string(temp));
+		}
+		int l = 0;
+		for (int i = 0; i < sqrt(n); i++) // формирование двумерного вектора из одномерного
+		{
+			for (int j = 0; j < sqrt(n); j++)
+			{
+				arr3[i][j] = arr1[l];
+				l++;
+			}
+		}
+
+
+
+		string ar0s = arr1[0]; // получение первых трех чисел
+		string ar1s = arr1[1]; //
+		string ar2s = arr1[2];//
 		//вывод string
 		print(BozoSort(arr1)); //1
 		cout << endl;
