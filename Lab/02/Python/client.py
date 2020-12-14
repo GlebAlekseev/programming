@@ -3,7 +3,6 @@ from openpyxl import load_workbook
 from flask import Flask, request
 import json
 import datetime
-import time
 
 
 app = Flask(__name__)
@@ -11,10 +10,12 @@ jbuffer = []
 @app.route('/', methods=['POST'])
 def index():
 	rows = request.json
+	status = "Ok"
+	now = datetime.datetime.now()#текущее время
 	for row in rows['check']: # получение новых данных
-		dicti = {"user_id":rows['user_id'],"datetime":"Время и дата","item":row['item'],"price":row['price']}
+		dicti = {"user_id":rows['user_id'],"datetime":now.strftime("%d.%m.%Y %H:%M:%S"),"item":row['item'],"price":row['price']}
 		jbuffer.append(dicti)
-		if len(jbuffer) == 10:
+		if len(jbuffer) >= 10:
 			try: # проверка на наличие файла
 				book = load_workbook("data.xlsx")
 			except FileNotFoundError:
@@ -39,9 +40,15 @@ def index():
 				sheet[1+ink][3].value = row['item'];
 				sheet[1+ink][4].value = row['price'];
 				ink +=1
-			book.save("data.xlsx")
-			jbuffer.clear()
-	return "Ok"
+			try: # проверка на наличие файла
+				book.save("data.xlsx")
+			except PermissionError:
+				status = "permission error"
+				break
+			else:
+				jbuffer.clear()
+				status = "added"
+	return status
 
 if __name__ == "__main__":
     app.run()
