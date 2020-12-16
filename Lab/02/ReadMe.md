@@ -50,27 +50,27 @@
 Первым делом я создал на сайте Яндекс.Диалоги свой диалог, назвал его Покупки Задорожный (Рис.1).<br>
 
 
-<div style="display: flex; justify-content: space-around;"><img src="./image/pic1.png"></div><br>
-<p style="text-align: center;">Рис.1 Раздел "Настройка" Яндекс.Диалоги</p>
+<div style="align: center;"><img src="./image/pic1.png"></div><br>
+<p style="align: center;">Рис.1 Раздел "Настройка" Яндекс.Диалоги</p>
 
 
 Изучил работу вебхуков, а также разобрался со структурой json для работы с яндексом. Для комфортной работы использовал https://jsonviewer.io/tree.
 
 Написал функционал для работы с корзиной, ниже на рисунке 2 показана работоспособность кода.
-<p style="text-align: center;">
+<p style="align: center;">
 ![](./image/pic2.png =300x800)<br>
 ![](./image/pic3.png =300x800)<br>
 Рис.2 Корзина<br><br>
 </p>
 
 Написал функционал для работы в режиме помощь, на рисунке 3 показана работоспособность кода.
-<p style="text-align: center;">
+<p style="align: center;">
 ![](./image/pic4.png)<br>
 Рис.3 Помощь<br><br>
 </p>
 
 Скриншот страницы управления webhook-ами с добавленным webhook-ом клиентского приложения (Рис.4).
-<p style="text-align: center;">
+<p style="align: center;">
 ![](./image/pic5.png)<br>
 Рис.4 Страница управления вебхуками.<br><br>
 </p>
