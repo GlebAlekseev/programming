@@ -98,9 +98,21 @@ using namespace std;
 using namespace httplib;
 using json = nlohmann::json;
 // В этой функции формируем ответ сервера на запрос
+bool findspl(char spl, string findstr, int posl = 0) {
+    bool status = false;
+    for (int i = posl; i < findstr.size(); i++)
+    {
+        if (findstr[i] == spl)
+        {
+            status = true;
+        }
+    }
+    return status;
+}
 void gen_response(const Request& req, Response& res) {
     ifstream lstrc("config.json");// получение данных из конфига в config, для отправки вебхуков во время завершения покупок
     json config;
+
     lstrc >> config;
     // Выводим на экран тело запроса
     json body = json::parse(req.body.c_str());//получаем от яндекса json
@@ -286,7 +298,7 @@ void gen_response(const Request& req, Response& res) {
                    j["session_state"]["dtbv"] = body["state"]["session"]["dtbv"];
                    j["session_state"]["basket"] = body["state"]["session"]["basket"];//заполнение шаблона сессионными данными
                    j["session_state"]["operating_mode"] = body["state"]["session"]["operating_mode"];// заполнение режима из сессии
-                   //////////////////////////////////////////////// работа с командами
+                   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// работа с командами
                    if (!j["session_state"]["dtbv"]) // Если False меняем, тк true оставляем как на шаблоне
                    {
                        for (int i = 0; i < j["response"]["buttons"].size(); i++)// Подгрузка голосового помощника
@@ -561,6 +573,7 @@ void gen_response(const Request& req, Response& res) {
                        else if (exithelp == u8R"(сумма)" && go == 0) {// выполнение команды сумма
                        int fullsum = 0;
                        int szb = j["session_state"]["basket"].size();
+
                        for (int i = 0; i < szb; i++)
                        {
                            if (!empty(j["session_state"]["basket"][i]["item"]) && !empty(j["session_state"]["basket"][i]["price"]))
@@ -573,6 +586,7 @@ void gen_response(const Request& req, Response& res) {
                        }                                           
                        else if (exithelp  == u8R"(покупка завершена)" && go == 0 || button == u8R"(покупка завершена)" && go == 0) {// выполнение команды покупка завершена
                            string url;
+                           int szb = j["session_state"]["basket"].size();
                            for (int i = 0; i < config["webhooks"].size(); i++)// отправка вебхуков на подписанный сервисы со страницы /webhooks
                            {
                                //После http:// https:// и до /  heder после [/  footer
@@ -586,14 +600,14 @@ void gen_response(const Request& req, Response& res) {
                                else { //если не авторизован anonymous
                                    temp["user_id"] = "anonymous";
                                }
-                               int szb = j["session_state"]["basket"].size();
+
                                bool statuswhat = false;
                                j["response"]["text"] = u8R"(заходите еще)";
                                j["response"]["end_session"] = true;
                                for (int k = 0; k < szb; k++)// добавление в шаблон товаров
                                {
 
-                                   if (!empty(j["session_state"]["basket"][i]["item"]) && !empty(j["session_state"]["basket"][i]["price"])) {
+                                   if (!empty(j["session_state"]["basket"][k]["item"]) && !empty(j["session_state"]["basket"][k]["price"])) {
 
                                        temp["check"].push_back(j["session_state"]["basket"][k]);
                                        statuswhat = true;
@@ -601,13 +615,13 @@ void gen_response(const Request& req, Response& res) {
                                }
                                if (statuswhat)
                                {
-                                   if (url.find("ttp"))// примитивная проверка на протокол.. ошибочный ввод
-                                   {
+
                                        string header = url.substr(0, url.find("/", 9));//получение первой части ссылки
                                        string footer = url.substr(url.find("/", 9));// получение второй части ссылки
                                        Client cli(header.c_str());
                                        auto resd = cli.Post(footer.c_str(), temp.dump(), "application/json");
 
+                                       
                                        if (resd) { //проверка на то удачно ли прошло
                                            // Проверяем статус ответа, т.к. может быть 404 и другие
                                            if (resd->status == 200) {
@@ -622,7 +636,7 @@ void gen_response(const Request& req, Response& res) {
                                            auto err = resd.error();
                                            std::cout << "Error code: " << err << std::endl;
                                        }
-                                   }
+                                   
                                }
                            }
 
@@ -631,7 +645,8 @@ void gen_response(const Request& req, Response& res) {
                        }
                        else {
                            j["response"]["text"] = u8R"(Неизвестная команда)";//некорректный ввод команды
-                       }                           
+                       }         
+
                        str = j.dump();
                 }
             }
@@ -664,7 +679,13 @@ void gen_responseHook(const Request& req, Response& res) {
         }   
         if (req.has_param("set"))//если с параметром set
         {
-            auto val_set = req.get_param_value("set");//достаем значение set
+            string val_set = req.get_param_value("set");//достаем значение set
+
+            if (!findspl('/', val_set, 9))
+            {
+                val_set.push_back('/');
+
+            }
             config["webhooks"].push_back(val_set);//добавляем новое значение
             ofstream csrc("config.json");// обновляем кеш
             csrc << config;
