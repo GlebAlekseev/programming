@@ -14,6 +14,53 @@ struct Student {
 	map <string, int> exams = { {{"mathematics",0},{"physics",0},{"history",0},{"programming",0}} };
 
 };
+bool operator< (Student& a, Student& b) {
+	return a.name < b.name;
+}
+bool operator> (Student & a, Student & b) {
+	return a.name > b.name;
+}
+template <typename T>
+vector<T> BozoSort(vector<T> arr, bool SortInfo = 1) { // для вектора
+
+	//bool operator> (Student & a, Student & b) {
+	//	return a.name > b.name;
+	//}
+	vector<T> last_arr = arr;
+	bool go = true;
+	srand(time(NULL));
+	int i= 0;
+	while (go) {
+
+		i++;
+		int a1 = rand() % last_arr.size();
+		int a2 = rand() % last_arr.size();
+		cout << i << " "<<a1 << " " << a2<<endl;
+		T temp = last_arr[a1];
+		last_arr[a1] = last_arr[a2];
+		last_arr[a2] = temp;
+		go = false;
+		for (int i = 1; i < last_arr.size(); i++)
+		{
+			if (SortInfo == 1)
+			{
+				// по возрастанию
+				if (last_arr[i - 1] > last_arr[i])
+				{
+					go = true;
+				}
+			}
+			else {
+				// по убыванию
+				if (last_arr[i - 1] < last_arr[i])
+				{
+					go = true;
+				}
+			}
+		}
+	}
+	return last_arr;
+}
 void printmain() {
 	cout << "+-----------+-------+------+------+------+------+" << endl;
 	cout << "| Name      | Group | Math | Phys | Hist | Prog |" << endl;
@@ -65,13 +112,13 @@ int main()
 	setlocale(LC_ALL, "");
 	vector<Student> man;
 	vector<int> randman;
-	vector<string> names {"Morrison K","Carter F","Gilbert V","Fisher S","Kirk E","Adamson R","Milton J","Warren M","Taylor B","Reynolds N"};
+	vector<string> names {"Carmack J","Akihiko K","Akihiko K","Kojima H","Carmack J","Carmack J","Kojima H","Carmack J","Persson М","Persson М"};
 
-	int g = 111;
-	int b1 = 64;
-	int b2 = 63;
-	int b3 = 66;
-	int b4 = 68;
+	int g =  rand() % 100;
+	int b1 = rand() % 100;
+	int b2 = rand() % 100;
+	int b3 = rand() % 100;
+	int b4 = rand() % 100;
 	for (int i = 0; i < 10; i++)// заполнение студентов
 	{
 		// g  это псевдорандом от [1 до 9] группа
@@ -85,6 +132,7 @@ int main()
 
 
 	}
+	man = BozoSort(man);
 	// Сделать перегрузку <<
 	printmain();
 	for (int  i = 0; i < man.size(); i++)// вывод двоишников
