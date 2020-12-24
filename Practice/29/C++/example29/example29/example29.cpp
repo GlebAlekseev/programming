@@ -35,7 +35,6 @@ vector<T> BozoSort(vector<T> arr, bool SortInfo = 1) { // для вектора
 		i++;
 		int a1 = rand() % last_arr.size();
 		int a2 = rand() % last_arr.size();
-		cout << i << " "<<a1 << " " << a2<<endl;
 		T temp = last_arr[a1];
 		last_arr[a1] = last_arr[a2];
 		last_arr[a2] = temp;
@@ -48,6 +47,7 @@ vector<T> BozoSort(vector<T> arr, bool SortInfo = 1) { // для вектора
 				if (last_arr[i - 1] > last_arr[i])
 				{
 					go = true;
+					break;
 				}
 			}
 			else {
@@ -55,6 +55,7 @@ vector<T> BozoSort(vector<T> arr, bool SortInfo = 1) { // для вектора
 				if (last_arr[i - 1] < last_arr[i])
 				{
 					go = true;
+					break;
 				}
 			}
 		}
@@ -66,7 +67,7 @@ void printmain() {
 	cout << "| Name      | Group | Math | Phys | Hist | Prog |" << endl;
 	cout << "+-----------+-------+------+------+------+------+" << endl;
 }
-void operator<< (ostream& out,Student student) {
+ostream& operator<< (ostream& out,Student student) {
 	out << "| " << setw(10) << left << student.name << "| ";
 	out << setw(6) << left << student.group;
 	out << "| ";
@@ -81,10 +82,10 @@ void operator<< (ostream& out,Student student) {
 	out << endl;
 	out << "+-----------+-------+------+------+------+------+";
 	out << endl;
-
+	return out;
 }
 
-void operator<< (ostream& out, vector<Student> student) {
+ostream& operator<< (ostream& out, vector<Student> student) {
 	for (int i = 0; i < student.size(); i++)
 	{
 		out << "| " << setw(10) <<left<< student[i].name << "| ";
@@ -103,7 +104,7 @@ void operator<< (ostream& out, vector<Student> student) {
 		out << endl;
 	}
 
-
+	return out;
 }
 
 int main()
