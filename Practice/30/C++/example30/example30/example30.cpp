@@ -6,10 +6,23 @@
 #include <cstdlib>
 #include <ctime>
 using namespace std;
-vector<vector<string>> chnums = { {"Rune","0.06","5","FIRE"},{"Rune","0.07","5","EARTH"},{"Rune","0.13","5","WATER"},{"Rune","0.14","5","AIR"},
-								{"Rune","0.6","5","FIRE"},{"Rune","0.7","5","EARTH"},{"Rune","1.3","5","WATER"},{"Rune","1.4","5","AIR"},
-								{"Weapon","1.4","100","0","100"}, {"Weapon","1.4","75","50","100"}, {"Armor","2.8","50","100"},
-								{"Rune","6","1","FIRE"},{"Rune","7","1","EARTH"},{"Rune","13","1","WATER"},{"Rune","14","1","AIR"},{"Coin","50","1000"} };// исходные данные
+vector<vector<string>> chnums = { 
+	{"Rune","0,06","10","FIRE"},
+	{"Rune","0,07","10","EARTH"},
+	{"Rune","0,13","10","WATER"},
+	{"Rune","0,14","10","AIR"},						
+	{"Rune","0,6","5","FIRE"},
+	{"Rune","0,7","5","EARTH"},
+	{"Rune","1,3","5","WATER"},
+	{"Rune","1,4","5","AIR"},						
+	{"Weapon","1,4","100","0","100"}, 
+	{"Weapon","1,4","75","50","100"}, 
+	{"Armor","2,8","50","100"},	
+	{"Rune","6","1","FIRE"},
+	{"Rune","7","1","EARTH"},
+	{"Rune","13","1","WATER"},
+	{"Rune","14","1","AIR"},
+	{"Coin","50","1000"} };// исходные данные
 
 struct Item {// 2 части .. Перечисление с состоянием типа .. объединение принимающее единую структуру
 	enum class ItemType { // показывает содержащийся тип 
@@ -51,17 +64,17 @@ Item operator++ (Item& a) {
 	float f = rand() % 10000;
 	f = f / 100;
 	float sum = 0;
-	for (size_t j = 0; j < chnums.size(); j++)
+	for (int j = 0; j < chnums.size(); j++)
 	{
 		sum += stof(chnums[j][1]);
 		if (f <= sum - 0.01)
 		{
 			//нашло j элемент из исходника
-			chnums[j][0];
 			if (chnums[j][0] == "Coin")
 			{
 				a.TypeItem = (Item::ItemType)0;
-				a.uniontypes.Coins.count = stoi(chnums[j][2]); break;
+				a.uniontypes.Coins.count = stoi(chnums[j][2]); 
+				break;
 			}
 			if (chnums[j][0] == "Rune")
 			{
@@ -128,7 +141,6 @@ ostream& operator<<(ostream& out, Item myitem) {
 		else {
 			out << "Buster Sword" << endl;
 		}
-		out << myitem.uniontypes.Coins.count << " gold" << endl;
 	}
 	return out;
 }
