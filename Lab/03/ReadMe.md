@@ -44,6 +44,7 @@
 <br>
 Полный исходный код клиентского приложения;<br>
 ```Python
+
     from tkinter import *
     from PIL import ImageTk
     from PIL import Image
