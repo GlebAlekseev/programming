@@ -229,6 +229,202 @@ def addballs (event):# функция добавления шаров на по�
     # 5 - color: violet
     # 6 - color: yellow
 
+def Click (event):# При нажатии на шар
+    global status_mode_end
+    if status_mode_end == 1:# если игра окончена не выолняется
+        return
+    tile = event.widget
+    if len(light_last) != 0:
+        dellight(light_last[0],light_last[1])
+    light_last.clear()
+    bgrimgz_l = cellbgr_image.crop((1, 69, 67, 135)).resize((60, 60), Image.ANTIALIAS)
+    pic_size_same_as_bgr = Image.new("RGBA", bgrimgz_l.size)
+    pic_size_same_as_bgr.paste(tile.imgparentball, (3,3))
+    ball_over_bgr = Image.alpha_composite(bgrimgz_l, pic_size_same_as_bgr)
+    img_ball_cell = ImageTk.PhotoImage(ball_over_bgr)
+    lbl_ball_plate = Label(root, image=img_ball_cell,borderwidth=0)
+    lbl_ball_plate.image = img_ball_cell
+    lbl_ball_plate.place(x=65*tile.pos_r+50,y=65*tile.pos_l+30)
+    local = []
+    local.append(int(tile.pos_r))
+    local.append(int(tile.pos_l))
+    rowcol_out[:] = local
+    light_last.append(tile.pos_r)
+    light_last.append(tile.pos_l)
+
+def teleport(event):# перемещение шара
+    if len(rowcol_out) != 0: # если передана координата откуда, выполняется только если выбран шар до выполнения функции
+        tile = event.widget
+        pathx = []
+        pathy = []
+        pathy = []
+        dupole = copy.deepcopy(pole)# копия поля
+        coordx =[]
+        coordx.append(rowcol_out[1])
+        coordy =[]
+        coordy.append(rowcol_out[0])
+        pathx.append([])
+        pathy.append([])
+        pathx[0].append(coordx[0])
+        pathy[0].append(coordy[0])
+        def genway (dupole):# получение поля в котором 9 отмечены места куда есть доступ перемещения
+            lgth = len(coordx)
+            i = 0
+            while i < lgth:
+                try:
+                    if dupole[int(coordx[i])+1][int(coordy[i])] == 8:
+                        if coordx[i]+1 < 9:
+                            dupole[int(coordx[i])+1][int(coordy[i])] = 9
+                            coordx.append(coordx[i] + 1)
+                            coordy.append(coordy[i])
+                            ind1 = 0
+                            for x in pathx:
+                                if x[len(x)-1] == coordx[i]:
+                                    break
+                                ind1+=1
+                            pathx.append(copy.deepcopy(pathx[ind1]))
+                            pathy.append(copy.deepcopy(pathy[ind1]))
+                            pathx[len(pathx)-1].append(coordx[i]+1)
+                            pathy[len(pathy)-1].append(coordy[i])
+
+                except IndexError: # На случай выхода за грани поля
+                    pass
+                try: 
+                    if dupole[int(coordx[i])-1][int(coordy[i])] == 8:
+                        if coordx[i]-1 > -1:
+                            dupole[int(coordx[i])-1][int(coordy[i])] = 9
+                            coordx.append(coordx[i] - 1)
+                            coordy.append(coordy[i])
+                            ind1 = 0
+                            for x in pathx:
+                                if x[len(x)-1] == coordx[i]:
+                                    break
+                                ind1+=1
+                            pathx.append(copy.deepcopy(pathx[ind1]))
+                            pathy.append(copy.deepcopy(pathy[ind1]))
+                            pathx[len(pathx)-1].append(coordx[i]-1)
+                            pathy[len(pathy)-1].append(coordy[i])
+                except IndexError:
+                    pass
+                try: 
+                    if dupole[int(coordx[i])][int(coordy[i])+1] == 8:
+                        if coordy[i]+1 < 9 :
+                            dupole[int(coordx[i])][int(coordy[i])+1] = 9
+                            coordx.append(coordx[i])
+                            coordy.append(coordy[i]+1)
+                            ind1 = 0
+                            for x in pathx:
+                                if x[len(x)-1] == coordx[i]:
+                                    break
+                                ind1+=1
+                            pathx.append(copy.deepcopy(pathx[ind1]))
+                            pathy.append(copy.deepcopy(pathy[ind1]))
+                            pathx[len(pathx)-1].append(coordx[i])
+                            pathy[len(pathy)-1].append(coordy[i]+1)
+                except IndexError:
+                    pass
+                try: 
+                    if dupole[int(coordx[i])][int(coordy[i])-1] == 8:
+                        if coordy[i]-1 > -1:
+                            dupole[int(coordx[i])][int(coordy[i])-1] = 9
+                            coordx.append(coordx[i])
+                            coordy.append(coordy[i]-1)
+                            ind1 = 0
+                            for x in pathx:
+                                if x[len(x)-1] == coordx[i]:
+                                    break
+                                ind1+=1
+                            pathx.append(copy.deepcopy(pathx[ind1]))
+                            pathy.append(copy.deepcopy(pathy[ind1]))
+                            pathx[len(pathx)-1].append(coordx[i])
+                            pathy[len(pathy)-1].append(coordy[i]-1)
+                except IndexError:
+                    pass
+
+                i+=1
+            coordx.reverse()
+            k = 0
+            while k < lgth:
+                coordx.pop()
+                k +=1
+            coordx.reverse()
+
+            coordy.reverse()
+            k = 0
+            while k < lgth:
+                coordy.pop()
+                k += 1
+            coordy.reverse()
+            if len(coordx) !=0:
+                genway (dupole)
+
+        genway(dupole)
+        if dupole[tile.row][tile.col] == 9 : # выполняется если переданная координата стоит 9
+            lbl_dupleon = Label(root, image=tile.image,borderwidth=0)
+            lbl_dupleon.image = tile.image
+            lbl_dupleon.row = rowcol_out[1]
+            lbl_dupleon.col = rowcol_out[0]
+            lbl_dupleon.bind("<Button-1>", lambda event: teleport(event))
+            lbl_dupleon.place(x=65*rowcol_out[0]+50,y=65*rowcol_out[1]+30)
+            cellbgr_image = Image.open("images/cell-bgr.png").convert('RGBA')
+            bgrimgzdu = cellbgr_image.crop((1, 0, 67, 66)).resize((60, 60), Image.ANTIALIAS)
+            pic_size_same_as_bgr1du = Image.new("RGBA", bgrimgzdu.size)
+            pic_size_same_as_bgr1du.paste(images_balls[pole[rowcol_out[1]][rowcol_out[0]]][6], (1,1))
+            ball_over_bgr1du = Image.alpha_composite(bgrimgzdu, pic_size_same_as_bgr1du)
+            imgbgFIN1du = ImageTk.PhotoImage(ball_over_bgr1du)
+            lbl_dupleonnew = Label(root, image=imgbgFIN1du,borderwidth=0)
+            lbl_dupleonnew.imgparentball = images_balls[pole[rowcol_out[1]][rowcol_out[0]]][6]
+            lbl_dupleonnew.pos_r = tile.col
+            lbl_dupleonnew.pos_l = tile.row
+            lbl_dupleonnew.image = imgbgFIN1du
+            lbl_dupleonnew.bind("<Button-1>", lambda event: Click(event))
+            lbl_dupleonnew.place(x=65*tile.col+50,y=65*tile.row+30)
+            temp = pole[rowcol_out[1]][rowcol_out[0]]
+            pole[rowcol_out[1]][rowcol_out[0]] = 8
+            pole[tile.row][tile.col] = temp
+            rowcol_out.clear()
+            addballs (1)
+images_balls = []
+for i in range(0,7):# формирование списка из списков, хранение шаров разных размеров
+    images_balls.append([])
+    ball_raw_img = Image.open(colorpath[i]).convert('RGBA')# ячейка
+    img_ball_st6 = ball_raw_img.crop((1, 1, 55, 56))
+    img_ball_st5 = ball_raw_img.crop((1, 61, 55, 115))
+    img_ball_st4 = ball_raw_img.crop((1, 121, 55, 175))
+    img_ball_st3 = ball_raw_img.crop((1, 181, 55, 235))
+    img_ball_st2 = ball_raw_img.crop((1, 241, 55, 295))
+    img_ball_st1 = ball_raw_img.crop((1, 301, 55, 355))
+    img_ball_st0 = ball_raw_img.crop((1, 361, 55, 415))
+    images_balls[i].append(img_ball_st0)
+    images_balls[i].append(img_ball_st1)
+    images_balls[i].append(img_ball_st2)
+    images_balls[i].append(img_ball_st3)
+    images_balls[i].append(img_ball_st4)
+    images_balls[i].append(img_ball_st5)
+    images_balls[i].append(img_ball_st6)
+def del_oncoords(coords):# удаление координат, используется при удалении шаров в линии
+    i = 0
+    cellbgr_image = Image.open("images/cell-bgr.png").convert('RGBA')
+    bgrimgzdu = cellbgr_image.crop((1, 0, 67, 66)).resize((60, 60), Image.ANTIALIAS)
+    imgbgFIN1du = ImageTk.PhotoImage(bgrimgzdu)
+    while i < len(coords):# проход по переданным координатам
+        x = coords[i]
+        y = coords[i+1]
+        lbl_dupleon = Label(root, image=imgbgFIN1du,borderwidth=0)
+        lbl_dupleon.image = imgbgFIN1du
+        lbl_dupleon.row = x
+        lbl_dupleon.col = y
+        lbl_dupleon.bind("<Button-1>", lambda event: teleport(event))
+        lbl_dupleon.place(x=65*y+50,y=65*x+30)
+        pole[x][y] = 8
+        global SCORE
+        SCORE +=2
+        score_temp = SCORE
+        cs = Canvas(width=90, height=30,highlightthickness=0)
+        cs.create_image(45, 10, image=bg)
+        lab = cs.create_text(45, 10, text=['Счет:',str(SCORE)], fill="White",font='MicrosoftSansSerif 17')
+        cs.place(x=685,y=100)
+        i+=2
 ```
 
 
