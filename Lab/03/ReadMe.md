@@ -425,6 +425,384 @@ def del_oncoords(coords):# удаление координат, использу
         lab = cs.create_text(45, 10, text=['Счет:',str(SCORE)], fill="White",font='MicrosoftSansSerif 17')
         cs.place(x=685,y=100)
         i+=2
+
+
+def delneedline():# функция удаления линий
+
+    # Ниже представлен поиск линий на поле, а также для диагоналей получение диагоналей вертикально* горизонтально* для упрощения алгоритма
+    y = 0
+    iupole1 = []
+    iupole2 = []
+    iupole3 = []
+    iupole4 = []
+    Xiu1 = []
+    Yiu1 = []
+    Xiu2 = []
+    Yiu2 = []
+    while y < len(pole):
+        x = 0
+        iupole1.append([])
+        Xiu1.append([])
+        Yiu1.append([])
+        while x <= y:
+            iupole1[y].append(copy.deepcopy(pole[y][y-x]))
+            Xiu1[y].append(y)
+            Yiu1[y].append(y-x)
+            x += 1
+
+        y +=1
+    j = 0
+    while j < len(iupole1):
+        h = 0
+        while h< len(iupole1) - len(iupole1[j]):
+            iupole1[j].append(8)
+            h +=1
+        j+=1
+    y = 0
+    while y < len(pole):
+        x = 0
+
+        iupole2.append([])
+        Xiu2.append([])
+        Yiu2.append([])
+        while x <= y:
+            iupole2[y].append(copy.deepcopy(pole[y-x][y]))
+            Xiu2[y].append(y-x)
+            Yiu2[y].append(y)
+            x += 1
+
+        y +=1
+    j = 0
+    while j < len(iupole2):
+        h = 0
+        while h< len(iupole2) - len(iupole2[j]):
+            iupole2[j].append(8)
+            h +=1
+        j+=1
+    p = 0
+    while p<len(iupole1[0]):
+        f = 0
+        coordsXY = []
+        line = []
+        hello = []# убрать
+        if iupole1[0][p] != 8:
+            line.append(copy.deepcopy(iupole1[0][p]))
+            coordsXY.append(Xiu1[0][p])
+            coordsXY.append(Yiu1[0][p])
+        while f< len(iupole1)-1:
+            if iupole1[f+1][p] == 8:
+                if len(line)> 4:
+                    hello = copy.deepcopy(line)
+                    del_oncoords(coordsXY)
+                coordsXY.clear()
+                line.clear()
+                f+=1
+                continue
+            if iupole1[f][p] == iupole1[f+1][p] and f == len(iupole1)-2:
+                line.append(copy.deepcopy(iupole1[f+1][p]))
+                coordsXY.append(Xiu1[f+1][p])
+                coordsXY.append(Yiu1[f+1][p])
+                if len(line)> 4:
+                    hello = copy.deepcopy(line)
+                    del_oncoords(coordsXY)
+                coordsXY.clear()
+                line.clear()
+                f+=1
+                continue
+            if iupole1[f][p] != iupole1[f+1][p]:
+                if len(line)> 4:
+                    hello = copy.deepcopy(line)
+                    del_oncoords(coordsXY)
+                line.clear()
+                coordsXY.clear()
+            line.append(copy.deepcopy(iupole1[f+1][p]))
+            coordsXY.append(Xiu1[f+1][p])
+            coordsXY.append(Yiu1[f+1][p])
+            f+=1
+        line.clear()
+        coordsXY.clear()
+        p+=1
+    coordsXY.clear()
+    line.clear()
+    p = 0
+    while p<len(iupole2[0]):
+        f = 0
+        coordsXY = []
+        line = []
+        hello = []
+        if iupole2[0][p] != 8:
+            line.append(copy.deepcopy(iupole2[0][p]))
+            coordsXY.append(Xiu2[0][p])
+            coordsXY.append(Yiu2[0][p])
+        while f< len(iupole2)-1:
+            if iupole2[f+1][p] == 8:
+                if len(line)> 4:
+                    hello = copy.deepcopy(line)
+                    del_oncoords(coordsXY)
+                coordsXY.clear()
+                line.clear()
+                f+=1
+                continue
+            if iupole2[f][p] == iupole2[f+1][p] and f == len(iupole2)-2:
+                line.append(copy.deepcopy(iupole2[f+1][p]))
+                coordsXY.append(Xiu2[f+1][p])
+                coordsXY.append(Yiu2[f+1][p])
+                if len(line)> 4:
+                    hello = copy.deepcopy(line)
+                    del_oncoords(coordsXY)
+                coordsXY.clear()
+                line.clear()
+                f+=1
+                continue
+            if iupole2[f][p] != iupole2[f+1][p]:
+                if len(line)> 4:
+                    hello = copy.deepcopy(line)
+                    del_oncoords(coordsXY)
+                coordsXY.clear()
+                line.clear()
+            line.append(copy.deepcopy(iupole2[f+1][p]))
+            coordsXY.append(Xiu2[f+1][p])
+            coordsXY.append(Yiu2[f+1][p])
+            f+=1
+        line.clear()
+        coordsXY.clear()
+        p+=1
+    line.clear()
+    coordsXY.clear()
+    def vertically_getcoords(iupole3):# поиск вертикальных линий
+        p = 0
+        while p<len(pole[0]):
+            f = 0
+            coordsXY = []
+            line = []
+            hello = []
+            if iupole3[0][p] != 8:
+                line.append(copy.deepcopy(iupole3[0][p]))
+                coordsXY.append(0)
+                coordsXY.append(p)
+            while f< len(iupole3)-1:
+                if iupole3[f+1][p] == 8:
+                    if len(line)> 4:
+                        hello = copy.deepcopy(line)
+                        del_oncoords(coordsXY)
+                    line.clear()
+                    coordsXY.clear()
+                    f+=1
+                    continue
+                if iupole3[f][p] == iupole3[f+1][p] and f == len(iupole3)-2:
+                    line.append(copy.deepcopy(iupole3[f+1][p]))
+                    coordsXY.append(f+1)
+                    coordsXY.append(p)
+                    if len(line)> 4:
+                        hello = copy.deepcopy(line)
+                        del_oncoords(coordsXY)
+                    line.clear()
+                    coordsXY.clear()
+                    f+=1
+                    continue
+                if iupole3[f][p] != iupole3[f+1][p]:
+                    if len(line)> 4:
+                        hello = copy.deepcopy(line)
+                        del_oncoords(coordsXY)
+                    line.clear()
+                    coordsXY.clear()
+                line.append(copy.deepcopy(iupole3[f+1][p]))
+                coordsXY.append(f+1)
+                coordsXY.append(p)
+                f+=1
+            line.clear()
+            coordsXY.clear()
+            p+=1
+        line.clear()
+        coordsXY.clear()
+    y = 1 
+    Xiu3 = []
+    Yiu3 = []
+    while y < len(pole):
+        x = len(pole)
+        iupole3.append([])
+        Xiu3.append([])
+        Yiu3.append([])
+        while x >y:
+            iupole3[y-1].append(copy.deepcopy(pole[len(pole)-x+y][x-1]))
+            Xiu3[y-1].append(len(pole)-x+y)
+            Yiu3[y-1].append(x-1)
+            x -= 1
+        y +=1
+    y = 0 
+    Xiu4 = []
+    Yiu4 = []
+    while y < len(pole):
+        x = len(pole)
+        iupole4.append([])
+        Xiu4.append([])
+        Yiu4.append([])
+        while x >y:
+            iupole4[y].append(copy.deepcopy(pole[x-1-y][len(pole)-x]))
+            Xiu4[y].append(x-1-y)
+            Yiu4[y].append(len(pole)-x)
+            x -= 1
+        y +=1
+    def gorizontally_getcoords(iupole4): # поиск горизонтальных линий
+        p = 0
+        while p<len(iupole4):
+            f = 0
+            coordsXY = []
+            line = []
+            hello = []
+            if iupole4[p][0] != 8:
+                line.append(copy.deepcopy(iupole4[p][0]))
+                coordsXY.append(p)
+                coordsXY.append(0)
+            while f< len(iupole4[p])-1:
+                if iupole4[p][f+1] == 8:
+                    if len(line)> 4:
+                        hello = copy.deepcopy(line)
+                        del_oncoords(coordsXY)
+                    line.clear()
+                    coordsXY.clear()
+                    f+=1
+                    continue
+                if iupole4[p][f] == iupole4[p][f+1] and f == len(iupole4[p])-2:
+                    line.append(copy.deepcopy(iupole4[p][f+1]))
+                    coordsXY.append(p)
+                    coordsXY.append(f+1)
+                    if len(line)> 4:
+                        hello = copy.deepcopy(line)
+                        del_oncoords(coordsXY)
+                    line.clear()
+                    coordsXY.clear()
+                    f+=1
+                    continue
+                if iupole4[p][f] != iupole4[p][f+1]:
+                    if len(line)> 4:
+                        hello = copy.deepcopy(line)
+                        del_oncoords(coordsXY)
+                    line.clear()
+                    coordsXY.clear()
+                line.append(copy.deepcopy(iupole4[p][f+1]))
+                coordsXY.append(p)
+                coordsXY.append(f+1)
+                f+=1
+            line.clear()
+            coordsXY.clear()
+            p+=1
+        line.clear()
+        coordsXY.clear()
+    p = 0
+    while p<len(iupole4):
+        f = 0
+        coordsXY = []
+        line = []
+        hello = []
+        if iupole4[p][0] != 8:
+            line.append(copy.deepcopy(iupole4[p][0]))
+            coordsXY.append(Xiu4[p][0])
+            coordsXY.append(Yiu4[p][0])
+        while f< len(iupole4[p])-1:
+            if iupole4[p][f+1] == 8:
+                if len(line)> 4:
+                    hello = copy.deepcopy(line)
+                    del_oncoords(coordsXY)
+                line.clear()
+                coordsXY.clear()
+                f+=1
+                continue
+            if iupole4[p][f] == iupole4[p][f+1] and f == len(iupole4[p])-2:
+                line.append(copy.deepcopy(iupole4[p][f+1]))
+                coordsXY.append(Xiu4[p][f+1])
+                coordsXY.append(Yiu4[p][f+1])
+                if len(line)> 4:
+                    hello = copy.deepcopy(line)
+                    del_oncoords(coordsXY)
+                line.clear()
+                coordsXY.clear()
+                f+=1
+                continue
+            if iupole4[p][f] != iupole4[p][f+1]:
+                if len(line)> 4:
+                    hello = copy.deepcopy(line)
+                    del_oncoords(coordsXY)
+                line.clear()
+                coordsXY.clear()
+            line.append(copy.deepcopy(iupole4[p][f+1]))
+            coordsXY.append(Xiu4[p][f+1])
+            coordsXY.append(Yiu4[p][f+1])
+            f+=1
+        line.clear()
+        coordsXY.clear()
+        p+=1
+    line.clear()
+    coordsXY.clear()
+    p = 0
+    while p<len(iupole3):
+        f = 0
+        coordsXY = []
+        line = []
+        hello = []
+        if iupole3[p][0] != 8:
+            line.append(copy.deepcopy(iupole3[p][0]))
+            coordsXY.append(Xiu3[p][0])
+            coordsXY.append(Yiu3[p][0])
+        while f< len(iupole3[p])-1:
+            if iupole3[p][f+1] == 8:
+                if len(line)> 4:
+                    hello = copy.deepcopy(line)
+                    del_oncoords(coordsXY)
+                line.clear()
+                coordsXY.clear()
+                f+=1
+                continue
+            if iupole3[p][f] == iupole3[p][f+1] and f == len(iupole3[p])-2:
+                line.append(copy.deepcopy(iupole3[p][f+1]))
+                coordsXY.append(Xiu3[p][f+1])
+                coordsXY.append(Yiu3[p][f+1])
+                if len(line)> 4:
+                    hello = copy.deepcopy(line)
+                    del_oncoords(coordsXY)
+                line.clear()
+                coordsXY.clear()
+                f+=1
+                continue
+            if iupole3[p][f] != iupole3[p][f+1]:
+                if len(line)> 4:
+                    hello = copy.deepcopy(line)
+                    del_oncoords(coordsXY)
+                line.clear()
+                coordsXY.clear()
+            line.append(copy.deepcopy(iupole3[p][f+1]))
+            coordsXY.append(Xiu3[p][f+1])
+            coordsXY.append(Yiu3[p][f+1])
+            f+=1
+        line.clear()
+        coordsXY.clear()
+        p+=1
+    line.clear()
+    coordsXY.clear()
+    gorizontally_getcoords(pole)
+    vertically_getcoords(pole)
+# Построение поля массив[] в первый раз
+pole = []
+for row in range(9):
+    pole.append([])
+    for col in range(9):
+        pole[row].append(8)
+
+root.title("Линии 2") #Имя окна
+tileset = Image.open("images/page-bgr.png").convert('RGBA')# получение фона
+tileset1 = tileset.resize((110, 80), Image.ANTIALIAS) # подгон размера
+bg_main = tileset.resize((55, 55), Image.ANTIALIAS)
+imgbg = ImageTk.PhotoImage(tileset1)# получение тк фото
+bgimg = Label(root, image=imgbg, borderwidth=0)
+cellbgr_image = Image.open("images/cell-bgr.png").convert('RGBA')# ячейка
+bgrimgz = cellbgr_image.crop((1, 0, 67, 66)).resize((55, 55), Image.ANTIALIAS) 
+bgrimgz_l = cellbgr_image.crop((1, 69, 67, 135)).resize((55, 55), Image.ANTIALIAS) 
+img_cellbgr = ImageTk.PhotoImage(cellbgr_image.crop((1, 0, 67, 66)).resize((60, 60), Image.ANTIALIAS))# вырез темную часть
+img_cellbgru = ImageTk.PhotoImage(cellbgr_image.crop((1, 69, 67, 135)).resize((60, 60), Image.ANTIALIAS)) # вырез светл часть
+for row in range(8):# фон
+    for col in range(9):
+        bgimg = Label(root, image=imgbg, borderwidth=0)
+        bgimg.grid(row=row,column=col)
 ```
 
 
