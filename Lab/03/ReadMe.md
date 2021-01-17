@@ -803,6 +803,38 @@ for row in range(8):# фон
     for col in range(9):
         bgimg = Label(root, image=imgbg, borderwidth=0)
         bgimg.grid(row=row,column=col)
+
+def print_pole_back():  #Построение поля (пустого)
+    for row in range(9):
+        for col in range(9):
+            lbl_ball_X = Label(root, image=img_cellbgr,borderwidth=0)
+            lbl_ball_X.image = img_cellbgr
+            lbl_ball_X.bind("<Button-1>", lambda event: teleport(event))
+            lbl_ball_X.row = row
+            lbl_ball_X.col = col
+            lbl_ball_X.place(x=65*col+50,y=65*row+30)
+print_pole_back()# Для первой инициализации
+c = Canvas(width=90, height=30,highlightthickness=0) # обход прозрачного фона лейбл
+bg = PhotoImage(file="images/page-bgr.png")
+c.create_image(45, 10, image=bg)
+lab = c.create_text(45, 10, text="Линии 2", fill="White",font='MicrosoftSansSerif 17')
+cs = Canvas(width=90, height=30,highlightthickness=0)
+cs.create_image(45, 10, image=bg)
+lab = cs.create_text(45, 10, text="Счет: 0", fill="White",font='MicrosoftSansSerif 17')
+ci = Canvas(width=90, height=30,highlightthickness=0)
+ci.create_image(45, 10, image=bg)
+lab = ci.create_text(45, 10, text="Подсказка:", fill="#BFBFBF",font='MicrosoftSansSerif 13')
+btn_step = Button(root, text="Сделать ход",height="1",fg="#BFBFBF",font='MicrosoftSansSerif 11',bg="#636363")
+btn_step.bind("<Button-1>", lambda event: addballs(event))
+btn_new = Button(root, text="Новая игра",height="1",fg="#BFBFBF",font='MicrosoftSansSerif 15',bg="#636363")
+btn_new.bind("<Button-1>", lambda event: initz(event))
+addballs (1) # Добавляем три шара
+c.place(x=685,y=40)# Позиции
+cs.place(x=685,y=100)
+btn_step.place(x=685,y=170)
+ci.place(x=685,y=240)
+btn_new.place(x=685,y=330)
+root.mainloop()
 ```
 
 
