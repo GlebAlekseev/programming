@@ -407,7 +407,7 @@ def del_oncoords(coords):# удаление координат, использу
     cellbgr_image = Image.open("images/cell-bgr.png").convert('RGBA')
     bgrimgzdu = cellbgr_image.crop((1, 0, 67, 66)).resize((60, 60), Image.ANTIALIAS)
     imgbgFIN1du = ImageTk.PhotoImage(bgrimgzdu)
-    while i < len(coords):# проход по переданным координатам
+    while i < 10:# проход по переданным координатам
         x = coords[i]
         y = coords[i+1]
         lbl_dupleon = Label(root, image=imgbgFIN1du,borderwidth=0)
