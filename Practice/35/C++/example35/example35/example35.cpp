@@ -143,7 +143,7 @@ int main()
     create(Test, 30);
     for (int i = 0; i < 30; i++)
     {
-        set(Test, i, i);
+        set(Test, i, i+1);
     }
     print(Test);
     resize(Test, 50);

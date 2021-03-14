@@ -21,9 +21,29 @@ def print(array_main):
     _print(array_main)
     return array_main
 
-len_raw = int(input())
-start_elem_raw = int(input())
-step_raw = int(input())
+while 1:
+    len_raw = int(input())
+    if len_raw <= 10000 and len_raw >= 1:
+        break
+    else:
+        _print("len_raw ",len_raw," не входит в диапазон [1...10000]")
+
+while 1:
+    start_elem_raw = int(input())
+    if start_elem_raw <= 10000 and start_elem_raw >= -10000:
+        break
+    else:
+        _print("start_elem_raw ",start_elem_raw," не входит в диапазон [-10000...10000]")
+
+while 1:
+    step_raw = int(input())
+    if step_raw <= 10000 and step_raw >= -10000:
+        break
+    else:
+        _print("step_raw ",step_raw," не входит в диапазон [-10000...10000]")
+
+
+
 array_dark = create(len_raw, start_elem_raw, step_raw)
 print(sort(array_dark))
 
