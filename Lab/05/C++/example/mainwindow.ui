@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>278</width>
+    <height>370</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow{background-color:white;}
+QPushButton{border: 1px solid #360099;border-radius:2px;padding-top:5px;padding-bottom:5px;background-color:#F0F9FA;}
+QPushButton:hover{color: red;border-color: 1px solid red;}
+QPushButton:pressed{color: #AB274F;border-color: 2px solid #AB274F;}
+
+
+QPlainTextEdit{
+border: 1px solid gray;
+border-radius:2px;}
+
+QPlainTextEdit:focus{
+border: 1px solid #046167;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="minimumSize">
+    <size>
+     <width>278</width>
+     <height>370</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>278</width>
+     <height>670</height>
+    </size>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="main_lbl">
+        <property name="text">
+         <string>&lt;center style=&quot;color:#FF3379;font-size:10pt;&quot;&gt;Стеганография&lt;/center&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="status_lbl">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="upload_img_btn">
+        <property name="text">
+         <string>Загрузить картинку</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="decode_text_btn">
+        <property name="text">
+         <string>Декодировать текст</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="text_inp">
+        <property name="styleSheet">
+         <string notr="true">color:#474A51;</string>
+        </property>
+        <property name="placeholderText">
+         <string>Введите текст</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="encode_text_btn">
+        <property name="text">
+         <string>Закодировать текст</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="save_img_btn">
+        <property name="text">
+         <string>Сохранить картинку</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
